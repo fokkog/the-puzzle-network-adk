@@ -7,7 +7,7 @@ name = "the-puzzle-network"
 version = "0.1.0"
 description = "Multi-agent AI system for generating daily word games"
 authors = [{name = "The Puzzle Network Team"}]
-requires-python = ">=3.13"
+requires-python = ">=3.10"
 dependencies = [
     "google-adk>=1.19.0",
     "python-dotenv>=1.0.0",
