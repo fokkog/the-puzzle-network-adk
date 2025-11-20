@@ -1,1 +1,1 @@
-"""Tools module - centralized export of classes and backward-compatible tools."""
+"""Tools package - tools for the puzzle network."""
