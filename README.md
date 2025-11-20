@@ -82,7 +82,7 @@ cp .env.example .env
 Run the word game generation pipeline:
 
 ```bash
-python -m the_puzzle_network.main
+python -m main
 ```
 
 ### Development Tools

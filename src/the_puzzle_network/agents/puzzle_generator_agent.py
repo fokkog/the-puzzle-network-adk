@@ -33,10 +33,10 @@ Workflow steps:
 2. Create a puzzle by arranging its letters in a knight's tour pattern on a 3x3 chessboard with the middle square left empty,
 use a random starting position and a random starting direction.
 3. Create the string representation of the chessboard which is strictly 3 lines of text, each line containing 3 characters.
-All letters must be uppercase and position in the middle should be a space.
+All letters must be uppercase and the position in the middle (2nd character of 2nd line) should be a space.
 
 Output:
 The output should be a properly formatted JSON object with 2 elements:
-- the puzzle, being the string representation of the chessboard
-- the solution, being the original word
+- puzzle, being the string representation of the chessboard
+- solution, being the original word
 """

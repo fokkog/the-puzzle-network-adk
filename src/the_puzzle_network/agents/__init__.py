@@ -1,1 +1,1 @@
-"""Agents module - enhanced class-based agents for the puzzle network."""
+"""Agents package - agents for the puzzle network."""
