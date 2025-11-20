@@ -4,7 +4,15 @@ A state-of-the-art multi-agent AI system for generating daily word games using G
 
 ## Overview
 
-The Puzzle Network uses a coordinated team of AI agents (via Google ADK) to create engaging word games daily. The system orchestrates specialized agents that brainstorm game concepts, select appropriate words, and assemble polished final games ready for publication.
+The Puzzle Network uses a coordinated team of AI agents (via Google ADK) to create engaging word games daily.
+Specifically the games are of the type knight’s tour word puzzle, e.g.:
+```
+NRR
+T G
+EAS
+```
+...with a solution of STRANGER.
+Every day 3 games (of type easy, medium and hard) are published to the respective subscribers.
 
 ## Architecture
 
