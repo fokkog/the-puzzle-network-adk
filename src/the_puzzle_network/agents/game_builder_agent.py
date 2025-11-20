@@ -6,15 +6,17 @@ from typing import Any, cast
 from google.adk.agents import LlmAgent
 from google.adk.tools import BaseTool
 
-from ..tools import (
-    check_content_quality_tool,
+from ..tools.format_tools import (
     format_answer_key_tool,
     format_clue_tool,
     format_game_structure_tool,
+)
+from ..tools.validation_tools import (
+    GameType,
+    check_content_quality_tool,
     validate_game_completion_tool,
     validate_theme_consistency_tool,
 )
-from ..tools.validation_tools import GameType
 from .base_agent import (
     AgentConfig,
     AgentResult,

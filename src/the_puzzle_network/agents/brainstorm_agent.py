@@ -6,12 +6,12 @@ from typing import Any, cast
 from google.adk.agents import LlmAgent
 from google.adk.tools import BaseTool
 
-from ..tools import (
+from ..tools.validation_tools import GameType
+from ..tools.word_tools import (
     calculate_difficulty_tool,
     check_word_variety_tool,
     validate_word_tool,
 )
-from ..tools.validation_tools import GameType
 from .base_agent import (
     AgentConfig,
     AgentResult,

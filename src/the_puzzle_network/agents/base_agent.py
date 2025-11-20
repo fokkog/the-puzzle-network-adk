@@ -157,12 +157,12 @@ class CoordinatorAgent(BasePuzzleAgent):
             sub_agents: List of agents to coordinate
             config: Agent configuration
         """
+        self.sub_agents = sub_agents or []
         super().__init__(
             name="coordinator",
             role=AgentRole.COORDINATOR,
             config=config,
         )
-        self.sub_agents = sub_agents or []
 
     def _create_llm_agent(self) -> LlmAgent:
         """Create the coordinator LlmAgent."""
