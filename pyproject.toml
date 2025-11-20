@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "the-puzzle-network"
+version = "0.1.0"
+description = "Multi-agent AI system for generating daily word games"
+authors = [{name = "The Puzzle Network Team"}]
+requires-python = ">=3.13"
+dependencies = [
+    "google-adk>=1.19.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.21.0",
+]
+
+[tool.setuptools]
+packages = ["the_puzzle_network"]
+
+[tool.setuptools.package-dir]
+"" = "src"
