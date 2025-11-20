@@ -69,7 +69,7 @@ cp .env.example .env
 # Edit .env and add your GOOGLE_API_KEY
 ```
 
-## Usage
+### Usage
 
 Run the word game generation pipeline:
 
@@ -77,58 +77,9 @@ Run the word game generation pipeline:
 python -m the_puzzle_network.main
 ```
 
-## Project Structure
-
-```
-the-puzzle-network/
-├── src/the_puzzle_network/
-│   ├── __init__.py
-│   ├── main.py                    # Entry point & workflow orchestrator
-│   ├── agents/
-│   │   ├── __init__.py
-│   │   ├── base_agent.py         # Root coordinator agent
-│   │   ├── brainstorm_agent.py   # Idea generation agent
-│   │   ├── word_picker_agent.py  # Word selection agent
-│   │   └── game_builder_agent.py # Game assembly agent
-│   └── tools/
-│       ├── __init__.py
-│       ├── word_tools.py          # Word operations
-│       ├── format_tools.py        # Formatting utilities
-│       └── validation_tools.py    # Quality validation
-├── tests/
-│   └── __init__.py
-├── docs/
-│   └── ARCHITECTURE.md
-├── pyproject.toml
-├── .env.example
-├── .gitignore
-└── README.md
-```
-
-## Development
-
 ### Running Tests
 
 ```bash
 pip install -e ".[dev]"
 pytest tests/
 ```
-
-### Configuration
-
-Edit `.env` to customize:
-- `GOOGLE_API_KEY`: Your Gemini API key
-- `APP_NAME`: Application identifier
-- `LOG_LEVEL`: Logging verbosity (DEBUG, INFO, WARNING, ERROR)
-
-## API Reference
-
-See `docs/ARCHITECTURE.md` for detailed agent and tool API documentation.
-
-## License
-
-Apache 2.0
-
-## Contributing
-
-Contributions welcome. Please ensure Python 3.13+ compatibility and add tests for new features.
