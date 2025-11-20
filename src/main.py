@@ -4,9 +4,12 @@ import asyncio
 import os
 
 from dotenv import load_dotenv
-from google.adk.runners import InMemoryRunner
+from google.adk.events import Event
+from google.adk.runners import Runner
+from google.adk.sessions import InMemorySessionService
 from google.genai import types
 
+from the_puzzle_network.agents.puzzle_classifier_agent import PuzzleClassifierAgent
 from the_puzzle_network.agents.puzzle_generator_agent import PuzzleGeneratorAgent
 
 
@@ -28,22 +31,45 @@ async def main() -> None:
             http_status_codes=[429, 500, 503, 504],  # Retry on these HTTP errors
         )
 
-        root_agent = PuzzleGeneratorAgent(retry_options).agent
-        runner = InMemoryRunner(agent=root_agent)
+        session_service = InMemorySessionService()
+        puzzle_generator_agent = PuzzleGeneratorAgent(retry_options).agent
+        runner = Runner(
+            agent=puzzle_generator_agent,
+            app_name=app_name,
+            session_service=session_service,
+        )
         response = await runner.run_debug("Please return next puzzle", quiet=True)
-        if len(response) > 0:
-            if (
-                response[0].content
-                and response[0].content.parts
-                and len(response[0].content.parts) > 0
-            ):
-                print(response[0].content.parts[0].text)
+        puzzle = extract_textpart(response)
+        print(f"Generated puzzle: {puzzle}")
+
+        puzzle_classifier_agent = PuzzleClassifierAgent(retry_options, puzzle).agent
+        runner = Runner(
+            agent=puzzle_classifier_agent,
+            app_name=app_name,
+            session_service=session_service,
+        )
+        response = await runner.run_debug("Please classify next puzzle", quiet=True)
+        classification = extract_textpart(response)
+        print(f"Generated classification: {classification}")
 
     except Exception as e:
         print(f"❌ Unexpected error: {e}")
         import traceback
 
         traceback.print_exc()
+
+
+def extract_textpart(response: list[Event]) -> str:
+    textpart = "N/A"
+    if (
+        len(response) > 0
+        and response[0].content
+        and response[0].content.parts
+        and len(response[0].content.parts) > 0
+        and response[0].content.parts[0].text
+    ):
+        textpart = response[0].content.parts[0].text
+    return textpart
 
 
 if __name__ == "__main__":
