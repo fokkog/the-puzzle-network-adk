@@ -42,7 +42,7 @@ The Puzzle Network uses a coordinated team of AI agents (via Google ADK) to crea
 ## Setup
 
 ### Prerequisites
-- Python 3.13+
+- Python 3.10+
 - Google Gemini API key
 
 ### Installation
@@ -54,7 +54,7 @@ cd the-puzzle-network
 
 2. Create and activate a virtual environment:
 ```bash
-python3.13 -m venv venv
+python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
@@ -77,9 +77,48 @@ Run the word game generation pipeline:
 python -m the_puzzle_network.main
 ```
 
-### Running Tests
+### Development Tools
+
+This project uses modern Python development tools for code quality and consistency:
+
+- **ruff**: Fast linter and formatter (replaces black, flake8, isort)
+- **mypy**: Static type checking with gradual typing
+- **pre-commit**: Automated code quality checks on git commits
+
+#### Install Development Dependencies
 
 ```bash
 pip install -e ".[dev]"
+```
+
+#### Set Up Pre-commit Hooks
+
+```bash
+pre-commit install
+```
+
+#### Code Quality Commands
+
+```bash
+# Format code
+ruff format .
+
+# Check and fix linting issues
+ruff check --fix .
+
+# Run type checking
+mypy .
+
+# Run all pre-commit hooks manually
+pre-commit run --all-files
+```
+
+#### VS Code Integration
+
+The project includes VS Code settings for automatic formatting and linting on save. Install the ruff extension for the best experience.
+
+### Running Tests
+
+```bash
 pytest tests/
 ```

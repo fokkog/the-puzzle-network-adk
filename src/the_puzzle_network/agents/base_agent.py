@@ -1,20 +1,21 @@
 """Base coordinator agent for the puzzle network."""
 
 from google.adk.agents import LlmAgent
+
 from .brainstorm_agent import brainstorm_agent
-from .word_picker_agent import word_picker_agent
 from .game_builder_agent import game_builder_agent
+from .word_picker_agent import word_picker_agent
 
 
 def create_coordinator_agent() -> LlmAgent:
     """
     Create the main coordinator agent that orchestrates the workflow.
-    
+
     The coordinator manages the three-stage pipeline:
     1. Brainstorm ideas and themes
     2. Pick appropriate words
     3. Build the final game
-    
+
     Returns:
         LlmAgent configured as coordinator
     """
@@ -39,7 +40,7 @@ RESPONSIBILITIES:
 - Provide clear feedback on the generation process
 
 Keep the workflow moving smoothly by maintaining context and ensuring clear communication between agents.""",
-        sub_agents=[brainstorm_agent, word_picker_agent, game_builder_agent]
+        sub_agents=[brainstorm_agent, word_picker_agent, game_builder_agent],
     )
-    
+
     return coordinator

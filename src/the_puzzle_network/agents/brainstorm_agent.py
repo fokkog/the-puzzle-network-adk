@@ -1,7 +1,12 @@
 """Brainstorm agent for generating game ideas and concepts."""
 
 from google.adk.agents import LlmAgent
-from ..tools import validate_word_tool, calculate_difficulty_tool, check_word_variety_tool
+
+from ..tools import (
+    calculate_difficulty_tool,
+    check_word_variety_tool,
+    validate_word_tool,
+)
 
 
 brainstorm_agent = LlmAgent(
@@ -35,5 +40,5 @@ OUTPUT:
 
 Save your final recommendations to context state with key "brainstorm_result" so next agents can use them.""",
     tools=[validate_word_tool, calculate_difficulty_tool, check_word_variety_tool],
-    output_key="brainstorm_result"
+    output_key="brainstorm_result",
 )

@@ -1,10 +1,11 @@
 """Word picker agent for selecting and refining game words."""
 
 from google.adk.agents import LlmAgent
+
 from ..tools import (
-    validate_word_tool,
     calculate_difficulty_tool,
-    check_word_variety_tool
+    check_word_variety_tool,
+    validate_word_tool,
 )
 
 
@@ -44,5 +45,5 @@ OUTPUT:
 - Confirm final difficulty distribution
 - Save final word list to context state with key "picked_words" """,
     tools=[validate_word_tool, calculate_difficulty_tool, check_word_variety_tool],
-    output_key="picked_words"
+    output_key="picked_words",
 )

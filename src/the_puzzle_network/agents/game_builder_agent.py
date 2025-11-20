@@ -1,13 +1,14 @@
 """Game builder agent for assembling the final game product."""
 
 from google.adk.agents import LlmAgent
+
 from ..tools import (
-    format_game_structure_tool,
-    format_clue_tool,
-    format_answer_key_tool,
-    validate_game_completion_tool,
     check_content_quality_tool,
-    validate_theme_consistency_tool
+    format_answer_key_tool,
+    format_clue_tool,
+    format_game_structure_tool,
+    validate_game_completion_tool,
+    validate_theme_consistency_tool,
 )
 
 
@@ -59,7 +60,7 @@ Save final game to context state with key "final_game" """,
         format_answer_key_tool,
         validate_game_completion_tool,
         check_content_quality_tool,
-        validate_theme_consistency_tool
+        validate_theme_consistency_tool,
     ],
-    output_key="final_game"
+    output_key="final_game",
 )
