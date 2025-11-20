@@ -20,7 +20,7 @@ from the_puzzle_network.agents import (
 # Load environment variables
 load_dotenv()
 
-APP_NAME = os.getenv("APP_NAME", "the_puzzle_network")
+APP_NAME = os.getenv("APP_NAME")
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
 if not GOOGLE_API_KEY:
