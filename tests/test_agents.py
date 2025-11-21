@@ -11,15 +11,11 @@ from the_puzzle_network.utils import extract_textpart, load_env, retry_options
 
 async def run_classification_test(puzzle: str) -> str:
     """Run classification for a given puzzle."""
-    app_name = load_env()
-    session_service = InMemorySessionService()
-    agent = PuzzleClassifierAgent(retry_options, puzzle)
     runner = Runner(
-        agent=agent.agent,
-        app_name=app_name,
-        session_service=session_service,
+        agent=PuzzleClassifierAgent(retry_options, puzzle).agent,
+        app_name=load_env(),
+        session_service=InMemorySessionService(),
     )
-
     response = await runner.run_debug("Please classify this puzzle", quiet=True)
     return extract_textpart(response)
 

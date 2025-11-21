@@ -24,12 +24,15 @@ class BaseAgent(ABC):
 
     @abstractmethod
     def _get_agent_name(self) -> str:
+        """Get the name for this agent."""
         pass
 
     @abstractmethod
     def _get_instruction(self) -> str:
+        """Get the instruction prompt for this agent."""
         pass
 
     @abstractmethod
     def _get_output_key(self) -> str:
+        """Get the output key for this agent's response."""
         pass
