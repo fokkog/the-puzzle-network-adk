@@ -53,7 +53,7 @@ async def main() -> None:
             f"Please format this puzzle:\n{puzzle}", quiet=True
         )
         html = extract_textpart(response)
-        logger.info("Generated HTML: %s", html)
+        # logger.info("Generated HTML: %s", html) # Next block will show this anyway
 
         puzzle_publisher_agent = PuzzlePublisherAgent().agent
         runner = Runner(
