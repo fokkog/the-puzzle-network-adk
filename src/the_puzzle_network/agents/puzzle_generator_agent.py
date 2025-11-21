@@ -1,27 +1,22 @@
 """Specialized agent for generating knight's tour word puzzles."""
 
-from google.adk.agents import LlmAgent
-from google.adk.models import Gemini
 from google.genai import types
 
+from .base_agent import BaseAgent
 
-class PuzzleGeneratorAgent:
+
+class PuzzleGeneratorAgent(BaseAgent):
     def __init__(
         self,
         retry_options: types.HttpRetryOptions,
     ) -> None:
-        self.retry_options = retry_options
-        self.agent = self._create_llm_agent()
+        super().__init__(retry_options)
 
-    def _create_llm_agent(self) -> LlmAgent:
-        return LlmAgent(
-            model=Gemini(
-                model="gemini-3-pro-preview", retry_options=self.retry_options
-            ),
-            name="puzzle_generator_agent",
-            instruction=self._get_instruction(),
-            output_key="puzzle",
-        )
+    def _get_agent_name(self) -> str:
+        return "puzzle_generator_agent"
+
+    def _get_output_key(self) -> str:
+        return "puzzle"
 
     def _get_instruction(self) -> str:
         return """
