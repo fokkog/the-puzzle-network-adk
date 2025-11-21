@@ -27,5 +27,5 @@ The output should be the classification as a string, hence again 'easy', 'medium
 For reference:
 - Puzzle "OSQ\nU I\nTNE" with solution "QUESTION" is considered "easy"
 - Puzzle "SEL\nU C\nHED" with solution "SCHEDULE" is considered "medium"
-- Puzzle "RTA\nE I\nPLC" with solution "PARTICLE" is considered "hard"
+- Puzzle "LAI\nT E\nPCR" with solution "PARTICLE" is considered "hard"
 """

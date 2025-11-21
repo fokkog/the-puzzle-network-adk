@@ -57,14 +57,14 @@ def test_medium_classification():
 
 def test_hard_classification():
     """Test that agent can classify a puzzle as hard."""
-    puzzle = '{"puzzle":"RTA\nE I\nPLC","solution","PARTICLE"}'
+    puzzle = '{"puzzle":"LAI\nT E\nPCR","solution","PARTICLE"}'
     result = asyncio.run(_run_classification_test(puzzle))
     assert "hard" == result
 
 
 def test_formatting():
     """Test that agent can format a puzzle."""
-    puzzle = '{"puzzle":"RTA\nE I\nPLC","solution","PARTICLE"}'
+    puzzle = '{"puzzle":"LAI\nT E\nPCR","solution","PARTICLE"}'
     html = asyncio.run(_run_formatting_test(puzzle))
     logger.info("Generated HTML:\n%s\n", html)
     soup = BeautifulSoup(html, "html.parser")

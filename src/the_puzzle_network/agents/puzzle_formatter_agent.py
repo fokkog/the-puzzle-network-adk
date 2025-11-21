@@ -28,7 +28,7 @@ The clean and valid HTML snippet, without any headers (introductory text) or tra
 Size is not a concern, focus on quality and aesthetics.
 
 Workflow steps:
-1. Generate an nice-looking SVG image of the knight's tour puzzle, showing a chessboard with the letters arranged as per the input.
+1. Generate an nice-looking square SVG image of the knight's tour puzzle, showing the 3x3 chessboard with the letters arranged as per the input.
 2. Generate an HTML snippet that displays the image (inline) along with the solution below it.
 3. The solution should not be visible from the outset, but should be revealed when the user clicks on a 'Show Solution' button.
 """
