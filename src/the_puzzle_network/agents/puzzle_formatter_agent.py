@@ -1,16 +1,11 @@
 """Specialized agent for formatting knight's tour word puzzles."""
 
-from google.genai import types
-
 from .base_agent import BaseAgent
 
 
 class PuzzleFormatterAgent(BaseAgent):
-    def __init__(
-        self,
-        retry_options: types.HttpRetryOptions,
-    ) -> None:
-        super().__init__(retry_options)
+    def __init__(self) -> None:
+        super().__init__()
 
     def _get_agent_name(self) -> str:
         return "puzzle_formatter_agent"

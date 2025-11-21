@@ -8,13 +8,13 @@ from google.adk.sessions import InMemorySessionService
 
 from the_puzzle_network.agents.puzzle_classifier_agent import PuzzleClassifierAgent
 from the_puzzle_network.agents.puzzle_formatter_agent import PuzzleFormatterAgent
-from the_puzzle_network.utils import extract_textpart, load_env, retry_options
+from the_puzzle_network.utils import extract_textpart, load_env
 
 
 async def _run_classification_test(puzzle: str) -> str:
-    """Run classifier for a given puzzle."""
+    """Run classification for a given puzzle."""
     runner = Runner(
-        agent=PuzzleClassifierAgent(retry_options).agent,
+        agent=PuzzleClassifierAgent().agent,
         app_name=load_env(),
         session_service=InMemorySessionService(),
     )
@@ -27,7 +27,7 @@ async def _run_classification_test(puzzle: str) -> str:
 async def _run_formatting_test(puzzle: str) -> str:
     """Run formatter for a given puzzle."""
     runner = Runner(
-        agent=PuzzleFormatterAgent(retry_options).agent,
+        agent=PuzzleFormatterAgent().agent,
         app_name=load_env(),
         session_service=InMemorySessionService(),
     )

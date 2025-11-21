@@ -7,16 +7,22 @@ from google.adk.models import Gemini
 from google.genai import types
 
 
+# Default retry options for all agents
+retry_options = types.HttpRetryOptions(
+    attempts=3,
+    exp_base=2,
+    initial_delay=1,
+    http_status_codes=[429, 500, 503, 504],
+)
+
+
 class BaseAgent(ABC):
-    def __init__(self, retry_options: types.HttpRetryOptions) -> None:
-        self.retry_options = retry_options
+    def __init__(self) -> None:
         self.agent = self._create_llm_agent()
 
     def _create_llm_agent(self) -> LlmAgent:
         return LlmAgent(
-            model=Gemini(
-                model="gemini-3-pro-preview", retry_options=self.retry_options
-            ),
+            model=Gemini(model="gemini-3-pro-preview", retry_options=retry_options),
             name=self._get_agent_name(),
             instruction=self._get_instruction(),
             output_key=self._get_output_key(),

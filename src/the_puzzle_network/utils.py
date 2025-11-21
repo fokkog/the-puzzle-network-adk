@@ -4,7 +4,6 @@ import os
 
 from dotenv import load_dotenv
 from google.adk.events import Event
-from google.genai import types
 
 
 def load_env():
@@ -17,14 +16,6 @@ def load_env():
         f"✅ GOOGLE_API_KEY environment variable has been set, {app_name} can proceed."
     )
     return app_name
-
-
-retry_options = types.HttpRetryOptions(
-    attempts=3,
-    exp_base=2,
-    initial_delay=1,
-    http_status_codes=[429, 500, 503, 504],
-)
 
 
 def extract_textpart(response: list[Event]) -> str:

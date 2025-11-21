@@ -7,7 +7,7 @@ from google.adk.sessions import InMemorySessionService
 
 from the_puzzle_network.agents.puzzle_classifier_agent import PuzzleClassifierAgent
 from the_puzzle_network.agents.puzzle_generator_agent import PuzzleGeneratorAgent
-from the_puzzle_network.utils import extract_textpart, load_env, retry_options
+from the_puzzle_network.utils import extract_textpart, load_env
 
 
 async def main() -> None:
@@ -15,7 +15,7 @@ async def main() -> None:
         app_name = load_env()
 
         session_service = InMemorySessionService()
-        puzzle_generator_agent = PuzzleGeneratorAgent(retry_options).agent
+        puzzle_generator_agent = PuzzleGeneratorAgent().agent
         runner = Runner(
             agent=puzzle_generator_agent,
             app_name=app_name,
@@ -25,7 +25,7 @@ async def main() -> None:
         puzzle = extract_textpart(response)
         print(f"Generated puzzle: {puzzle}")
 
-        puzzle_classifier_agent = PuzzleClassifierAgent(retry_options).agent
+        puzzle_classifier_agent = PuzzleClassifierAgent().agent
         runner = Runner(
             agent=puzzle_classifier_agent,
             app_name=app_name,
