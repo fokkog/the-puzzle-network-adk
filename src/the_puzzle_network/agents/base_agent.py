@@ -24,8 +24,9 @@ class BaseAgent(ABC):
         return LlmAgent(
             model=Gemini(model="gemini-3-pro-preview", retry_options=retry_options),
             name=self._get_agent_name(),
-            instruction=self._get_instruction(),
+            tools=self._get_tools(),
             output_key=self._get_output_key(),
+            instruction=self._get_instruction(),
         )
 
     @abstractmethod
@@ -34,11 +35,16 @@ class BaseAgent(ABC):
         pass
 
     @abstractmethod
-    def _get_instruction(self) -> str:
-        """Get the instruction prompt for this agent."""
+    def _get_tools(self) -> list:
+        """Get the list of tools for this agent."""
         pass
 
     @abstractmethod
     def _get_output_key(self) -> str:
         """Get the output key for this agent's response."""
+        pass
+
+    @abstractmethod
+    def _get_instruction(self) -> str:
+        """Get the instruction prompt for this agent."""
         pass

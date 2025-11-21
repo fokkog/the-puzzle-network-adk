@@ -1,4 +1,4 @@
-"""Tests for PuzzleClassifierAgent classification values."""
+"""Basic tests for agents module."""
 
 import asyncio
 

@@ -8,7 +8,10 @@ class PuzzleGeneratorAgent(BaseAgent):
         super().__init__()
 
     def _get_agent_name(self) -> str:
-        return "puzzle_generator_agent"
+        return __name__.split(".")[-1]
+
+    def _get_tools(self) -> list:
+        return []
 
     def _get_output_key(self) -> str:
         return "puzzle"
