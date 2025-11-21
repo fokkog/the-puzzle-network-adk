@@ -9,9 +9,7 @@ class PuzzleClassifierAgent(BaseAgent):
     def __init__(
         self,
         retry_options: types.HttpRetryOptions,
-        puzzle: str,
     ) -> None:
-        self.puzzle = puzzle
         super().__init__(retry_options)
 
     def _get_agent_name(self) -> str:
@@ -21,10 +19,12 @@ class PuzzleClassifierAgent(BaseAgent):
         return "classification"
 
     def _get_instruction(self) -> str:
-        return f"""
+        return """
 You are the puzzle classifier AI assistant for our company called 'The Puzzle Network'.
 Your role is to read the knight's tour puzzle that is passed to you and to classify it as 'easy', 'medium' or 'hard' depending on its complexity.
-Puzzle with solution: {self.puzzle}
+
+Input:
+Puzzle with solution (provided in prompt).
 
 Output:
 The output should be the classification as a string, hence again 'easy', 'medium' or 'hard'.

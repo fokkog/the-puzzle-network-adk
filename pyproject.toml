@@ -20,6 +20,7 @@ dev = [
     "ruff>=0.6.0",
     "mypy>=1.8.0",
     "pre-commit>=3.6.0",
+    "beautifulsoup4>=4.14.0"
 ]
 
 [tool.pytest.ini_options]
@@ -83,6 +84,10 @@ ignore_missing_imports = true
 
 [[tool.mypy.overrides]]
 module = "pytest"
+ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "bs4.*"
 ignore_missing_imports = true
 
 [[tool.mypy.overrides]]

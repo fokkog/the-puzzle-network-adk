@@ -25,13 +25,15 @@ async def main() -> None:
         puzzle = extract_textpart(response)
         print(f"Generated puzzle: {puzzle}")
 
-        puzzle_classifier_agent = PuzzleClassifierAgent(retry_options, puzzle).agent
+        puzzle_classifier_agent = PuzzleClassifierAgent(retry_options).agent
         runner = Runner(
             agent=puzzle_classifier_agent,
             app_name=app_name,
             session_service=session_service,
         )
-        response = await runner.run_debug("Please classify this puzzle", quiet=True)
+        response = await runner.run_debug(
+            f"Please classify this puzzle:\n{puzzle}", quiet=True
+        )
         classification = extract_textpart(response)
         print(f"Generated classification: {classification}")
 
