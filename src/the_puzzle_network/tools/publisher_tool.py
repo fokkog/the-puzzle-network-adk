@@ -1,5 +1,10 @@
 """Publisher tools for game output and structure."""
 
+from ..logging import get_logger
+
+
+logger = get_logger(__name__)
+
 
 class PublisherTool:
     def __init__(self) -> None:
@@ -7,10 +12,7 @@ class PublisherTool:
 
     def publish(self, level: str, html_content: str) -> dict:
         """Sends out mail with the game content to the appropriate distribution list.
-        Actually to avoid the mail setup complexities, this function will just write the parameters to the console.
-
-        This tool simulates looking up a company's internal fee structure based on
-        the name of the payment method provided by the user.
+        Actually to avoid the mail setup complexities, this function will just log the parameters.
 
         Args:
             level: The level of the game, either 'easy', 'medium', or 'hard'.
@@ -22,7 +24,8 @@ class PublisherTool:
             Error: {"status": "error", "error_message": "publishing failed"}
         """
 
-        print(">>>>>>>>>>>>>> Sending out puzzle <<<<<<<<<<<<")
-        print(f"Level: {level}")
-        print(f"HTML Content: {html_content}")
+        logger.info(">>>>>>>>>>>>>> Sending out puzzle START <<<<<<<<<<<<")
+        logger.info("Level:\n%s", level)
+        logger.info("HTML Content:\n%s", html_content)
+        logger.info("<<<<<<<<<<<<<< Sending out puzzle  END  <<<<<<<<<<<<")
         return {"status": "success", "number of deliveries": 20}

@@ -5,6 +5,11 @@ import os
 from dotenv import load_dotenv
 from google.adk.events import Event
 
+from .logging import get_logger
+
+
+logger = get_logger(__name__)
+
 
 def load_env():
     load_dotenv()
@@ -12,8 +17,8 @@ def load_env():
     google_api_key = os.getenv("GOOGLE_API_KEY")
     if not google_api_key:
         raise ValueError("GOOGLE_API_KEY environment variable is not set.")
-    print(
-        f"✅ GOOGLE_API_KEY environment variable has been set, {app_name} can proceed."
+    logger.info(
+        "✅ GOOGLE_API_KEY environment variable has been set, %s can proceed.", app_name
     )
     return app_name
 

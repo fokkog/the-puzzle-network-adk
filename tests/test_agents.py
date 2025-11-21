@@ -8,7 +8,11 @@ from google.adk.sessions import InMemorySessionService
 
 from the_puzzle_network.agents.puzzle_classifier_agent import PuzzleClassifierAgent
 from the_puzzle_network.agents.puzzle_formatter_agent import PuzzleFormatterAgent
+from the_puzzle_network.logging import get_logger
 from the_puzzle_network.utils import extract_textpart, load_env
+
+
+logger = get_logger(__name__)
 
 
 async def _run_classification_test(puzzle: str) -> str:
@@ -62,6 +66,6 @@ def test_formatting():
     """Test that agent can format a puzzle."""
     puzzle = '{"puzzle":"RTA\nE I\nPLC","solution","PARTICLE"}'
     html = asyncio.run(_run_formatting_test(puzzle))
-    print(html)
+    logger.info("Generated HTML:\n%s\n", html)
     soup = BeautifulSoup(html, "html.parser")
     assert soup.find("div")
