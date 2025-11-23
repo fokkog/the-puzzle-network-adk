@@ -130,3 +130,17 @@ The project includes VS Code settings for automatic formatting and linting on sa
 ```bash
 pytest tests/
 ```
+
+## GitHub Actions CI/CD
+
+This project includes a comprehensive GitHub Actions workflow for continuous integration and deployment:
+
+***CI Pipeline*** (`.github/workflows/ci.yml`):
+   - Testing
+   - Code quality checking
+   - Type checking
+   - Security scanning
+   - Package building and validation
+   - Pre-commit hook validation
+
+To enable full CI/CD functionality, configure GOOGLE_API_KEY as a repository secret.
