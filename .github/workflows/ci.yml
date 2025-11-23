@@ -35,7 +35,7 @@ jobs:
           echo "✅ GOOGLE_API_KEY available, running full test suite"
           pytest -v --tb=short
         fi
-    - run: build
+    - run: python -m build
     - run: twine check dist/*
     - uses: actions/upload-artifact@v4
       with:
