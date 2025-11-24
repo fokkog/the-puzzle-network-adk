@@ -16,21 +16,21 @@ retry_options = types.HttpRetryOptions(
 )
 
 
-class BaseAgent(ABC):
+class PuzzleBaseAgent(ABC):
     def __init__(self) -> None:
         self.agent = self._create_llm_agent()
 
     def _create_llm_agent(self) -> LlmAgent:
         return LlmAgent(
             model=Gemini(model="gemini-3-pro-preview", retry_options=retry_options),
-            name=self._get_agent_name(),
+            name=self._get_name(),
             tools=self._get_tools(),
             output_key=self._get_output_key(),
             instruction=self._get_instruction(),
         )
 
     @abstractmethod
-    def _get_agent_name(self) -> str:
+    def _get_name(self) -> str:
         """Get the name for this agent."""
         pass
 

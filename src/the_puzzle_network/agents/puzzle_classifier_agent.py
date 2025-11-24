@@ -1,13 +1,13 @@
 """Specialized agent for classifying knight's tour word puzzles."""
 
-from .base_agent import BaseAgent
+from .puzzle_base_agent import PuzzleBaseAgent
 
 
-class PuzzleClassifierAgent(BaseAgent):
+class PuzzleClassifierAgent(PuzzleBaseAgent):
     def __init__(self) -> None:
         super().__init__()
 
-    def _get_agent_name(self) -> str:
+    def _get_name(self) -> str:
         return __name__.split(".")[-1]
 
     def _get_tools(self) -> list:
