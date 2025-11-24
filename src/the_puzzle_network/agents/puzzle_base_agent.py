@@ -4,7 +4,12 @@ from abc import ABC, abstractmethod
 
 from google.adk.agents import LlmAgent
 from google.adk.models import Gemini
+from google.adk.plugins import LoggingPlugin
+from google.adk.runners import Runner
+from google.adk.sessions import InMemorySessionService
 from google.genai import types
+
+from the_puzzle_network.utils import extract_textpart, load_env
 
 
 # Default retry options for all agents
@@ -18,10 +23,7 @@ retry_options = types.HttpRetryOptions(
 
 class PuzzleBaseAgent(ABC):
     def __init__(self) -> None:
-        self.agent = self._create_llm_agent()
-
-    def _create_llm_agent(self) -> LlmAgent:
-        return LlmAgent(
+        self.agent = LlmAgent(
             model=Gemini(model="gemini-3-pro-preview", retry_options=retry_options),
             name=self._get_name(),
             tools=self._get_tools(),
@@ -48,3 +50,13 @@ class PuzzleBaseAgent(ABC):
     def _get_instruction(self) -> str:
         """Get the instruction prompt for this agent."""
         pass
+
+    async def run_agent(self, prompt: str) -> str:
+        runner = Runner(
+            agent=self.agent,
+            app_name=load_env(),
+            session_service=InMemorySessionService(),
+            plugins=[LoggingPlugin()],
+        )
+        response = await runner.run_debug(prompt, quiet=True)
+        return extract_textpart(response)
