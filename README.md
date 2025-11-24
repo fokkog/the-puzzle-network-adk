@@ -14,38 +14,30 @@ EAS
 ...with a solution of STRANGER.
 Every day 3 games (of type easy, medium and hard) are published to the respective subscribers.
 
-## Architecture
-
+## Workflow
+**PuzzleNetworkWorkflow**: Sequential workflow
 ```
-┌─────────────────────────────────────────────────────────┐
-│              Coordinator Agent                          │
-│          (Orchestrates the workflow)                    │
-└──────────────────────┬──────────────────────────────────┘
-                       │
-        ┌──────────────┼──────────────┐
-        │              │              │
-        ▼              ▼              ▼
-  ┌─────────────┐ ┌──────────────┐ ┌─────────────────┐
-  │  Brainstorm │ │ Word Picker  │ │ Game Builder    │
-  │   Agent     │ │   Agent      │ │   Agent         │
-  └─────────────┘ └──────────────┘ └─────────────────┘
-        │              │                    │
-        └──────────────┴────────────────────┘
-                       │
-                       ▼
-            Shared Session State
-       (Ideas → Words → Final Game)
+┌────────────────────────────────────────────────────────────────────────────┐
+│                                SequentialAgent                             │
+│  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐    ┌─────────────┐  │
+│  │  GENERATOR  │───▶│ CLASSIFIER  │───▶│ FORMATTER   │───▶│ PUBLISHER   │  │
+│  │             │    │             │    │             │    │             │  │
+│  │ Creates     │    │ Determines  │    │ Converts to │    │ Delivers    │  │
+│  │ knight's    │    │ difficulty  │    │ HTML format │    │ to audience │  │
+│  │ tour puzzle │    │ level       │    │             │    │             │  │
+│  └─────────────┘    └─────────────┘    └─────────────┘    └─────────────┘  │
+│                                                                            │
+└────────────────────────────────────────────────────────────────────────────┘
 ```
 
 **Agents:**
-- **Brainstorm Agent**: Generates creative game concepts and themes
-- **Word Picker Agent**: Selects appropriate words based on difficulty and theme
-- **Game Builder Agent**: Assembles the final game with answers, hints, and metadata
+- **PuzzleGeneratorAgent**: Generates puzzle
+- **PuzzleClassifierAgent**: Classifies puzzle as easy/medium/hard
+- **PuzzleFormatterAgent**: Formats puzzle
+- **PuzzlePublisherAgent**: Published puzzle to appropriate distribution list
 
-**Tools:** Distributed across modular tool modules:
-- `word_tools.py`: Word validation, difficulty scoring, word list management
-- `format_tools.py`: Game structure formatting, output preparation
-- `validation_tools.py`: Quality checks, constraint validation
+**Tools:** 
+- **PuzzlePublisherTool**: Published puzzle to appropriate distribution list
 
 ## Setup
 
@@ -57,13 +49,13 @@ Every day 3 games (of type easy, medium and hard) are published to the respectiv
 
 1. Clone the repository:
 ```bash
-cd the-puzzle-network
+git clone https://github.com/fokkog/the-puzzle-network-adk.git
 ```
 
 2. Create and activate a virtual environment:
 ```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+python -m venv .venv
+source .venv/bin/activate  # On Windows: venv\Scripts\activate
 ```
 
 3. Install dependencies:
@@ -79,7 +71,7 @@ cp .env.example .env
 
 ### Usage
 
-Run the word game generation pipeline:
+Run the worfklow:
 
 ```bash
 python -m main
@@ -123,7 +115,7 @@ pre-commit run --all-files
 
 #### VS Code Integration
 
-The project includes VS Code settings for automatic formatting and linting on save. Install the ruff extension for the best experience.
+The project includes VS Code settings for automatic formatting and linting on save.
 
 ### Running Tests
 
@@ -131,7 +123,7 @@ The project includes VS Code settings for automatic formatting and linting on sa
 pytest tests/
 ```
 
-## GitHub Actions CI/CD
+### GitHub Actions CI/CD
 
 This project includes a comprehensive GitHub Actions workflow for continuous integration and deployment:
 
