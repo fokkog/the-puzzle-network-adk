@@ -2,11 +2,11 @@
 
 import pytest
 
-from the_puzzle_network.tools.publisher_tool import PublisherTool
+from the_puzzle_network.tools.puzzle_publisher_tool import PuzzlePublisherTool
 
 
 def test_dummy_publishing():
-    publisher = PublisherTool()
+    publisher = PuzzlePublisherTool()
     result = publisher.publish("easy", "<html>Test Content</html>")
     assert result.get("status") == "success"
     assert result.get("number of deliveries") == 20

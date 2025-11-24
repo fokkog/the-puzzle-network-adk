@@ -1,6 +1,6 @@
 """Specialized agent for publishing knight's tour word puzzles."""
 
-from ..tools.publisher_tool import PublisherTool
+from ..tools.puzzle_publisher_tool import PuzzlePublisherTool
 from .puzzle_base_agent import PuzzleBaseAgent
 
 
@@ -12,7 +12,7 @@ class PuzzlePublisherAgent(PuzzleBaseAgent):
         return __name__.split(".")[-1]
 
     def _get_tools(self) -> list:
-        return [PublisherTool().publish]
+        return [PuzzlePublisherTool().publish]
 
     def _get_output_key(self) -> str:
         return "distribution_status"

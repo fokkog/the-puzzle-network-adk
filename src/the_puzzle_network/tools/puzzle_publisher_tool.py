@@ -6,7 +6,7 @@ from ..logging import get_logger
 logger = get_logger(__name__)
 
 
-class PublisherTool:
+class PuzzlePublisherTool:
     def __init__(self) -> None:
         pass
 
