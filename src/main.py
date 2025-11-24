@@ -2,15 +2,8 @@
 
 import asyncio
 
-from google.adk.runners import Runner
-from google.adk.sessions import InMemorySessionService
-
-from the_puzzle_network.agents.puzzle_classifier_agent import PuzzleClassifierAgent
-from the_puzzle_network.agents.puzzle_formatter_agent import PuzzleFormatterAgent
-from the_puzzle_network.agents.puzzle_generator_agent import PuzzleGeneratorAgent
-from the_puzzle_network.agents.puzzle_publisher_agent import PuzzlePublisherAgent
 from the_puzzle_network.logging import get_logger
-from the_puzzle_network.utils import extract_textpart, load_env
+from the_puzzle_network.workflows.puzzle_network_workflow import PuzzleNetworkWorkflow
 
 
 logger = get_logger(__name__)
@@ -18,55 +11,8 @@ logger = get_logger(__name__)
 
 async def main() -> None:
     try:
-        app_name = load_env()
-        session_service = InMemorySessionService()
-
-        puzzle_generator_agent = PuzzleGeneratorAgent().agent
-        runner = Runner(
-            agent=puzzle_generator_agent,
-            app_name=app_name,
-            session_service=session_service,
-        )
-        response = await runner.run_debug("Please return next puzzle", quiet=True)
-        puzzle = extract_textpart(response)
-        logger.info("Generated puzzle: %s", puzzle)
-
-        puzzle_classifier_agent = PuzzleClassifierAgent().agent
-        runner = Runner(
-            agent=puzzle_classifier_agent,
-            app_name=app_name,
-            session_service=session_service,
-        )
-        response = await runner.run_debug(
-            f"Please classify this puzzle:\n{puzzle}", quiet=True
-        )
-        classification = extract_textpart(response)
-        logger.info("Generated classification: %s", classification)
-
-        puzzle_formatter_agent = PuzzleFormatterAgent().agent
-        runner = Runner(
-            agent=puzzle_formatter_agent,
-            app_name=app_name,
-            session_service=session_service,
-        )
-        response = await runner.run_debug(
-            f"Please format this puzzle:\n{puzzle}", quiet=True
-        )
-        html = extract_textpart(response)
-        # logger.info("Generated HTML: %s", html) # Next block will show this anyway
-
-        puzzle_publisher_agent = PuzzlePublisherAgent().agent
-        runner = Runner(
-            agent=puzzle_publisher_agent,
-            app_name=app_name,
-            session_service=session_service,
-        )
-        response = await runner.run_debug(
-            f"Please publish this puzzle with level {classification} and HTML content:\n{html}",
-            quiet=True,
-        )
-        publish_result = extract_textpart(response)
-        logger.info("Publishing result: %s", publish_result)
+        workflow = PuzzleNetworkWorkflow()
+        await workflow.run_workflow()
 
     except Exception as e:
         logger.error("❌ Unexpected error: %s", e)

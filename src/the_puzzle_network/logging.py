@@ -48,7 +48,7 @@ def setup_logging() -> None:
             },
         },
         "root": {
-            "level": log_level,
+            "level": "DEBUG",
             "handlers": ["console", "file"],
         },
     }
