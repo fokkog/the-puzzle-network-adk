@@ -34,10 +34,10 @@ Every day 3 games (of type easy, medium and hard) are published to the respectiv
 - **PuzzleGeneratorAgent**: Generates puzzle
 - **PuzzleClassifierAgent**: Classifies puzzle as easy/medium/hard
 - **PuzzleFormatterAgent**: Formats puzzle
-- **PuzzlePublisherAgent**: Published puzzle to appropriate distribution list
+- **PuzzlePublisherAgent**: Publishes puzzle to appropriate distribution list
 
 **Tools:** 
-- **PuzzlePublisherTool**: Published puzzle to appropriate distribution list
+- **PuzzlePublisherTool**: Tool behind PuzzlePublisherAgent
 
 ## Setup
 
